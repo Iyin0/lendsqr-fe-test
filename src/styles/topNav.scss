@@ -80,4 +80,48 @@ nav {
             }
         }
     }
+
+    .notification-mobile,
+    .side-nav-call {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+    nav {
+        padding: 10px 8px;
+        width: 100%;
+
+        img {
+            width: 100px;
+            height: 20px;
+        }
+
+        .search {
+            display: none;
+        }
+
+        .profile {
+            display: none;
+        }
+
+        .side-nav-call {
+            display: block;
+
+            img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+        }
+
+        .notification-mobile {
+            display: block;
+
+            svg {
+                transform: scale(0.8);
+            }
+        }
+    }
 }
