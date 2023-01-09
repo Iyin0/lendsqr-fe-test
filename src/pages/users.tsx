@@ -85,47 +85,47 @@ const Users = () => {
         }
     ]
 
-    // const getAllUsers = async () => {
-    //     setFetching(true)
-    //     setError(false)
-    //     const response = await fetch('https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users')
-    //     const json = await response.json()
+    const getAllUsers = async () => {
+        setFetching(true)
+        setError(false)
+        const response = await fetch('https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users')
+        const json = await response.json()
 
-    //     if (!response.ok) {
-    //         setError(json.error)
-    //         setFetching(false)
-    //     }
+        if (!response.ok) {
+            setError(json.error)
+            setFetching(false)
+        }
 
-    //     if (response.ok) {
-    //         setUsers(addStatus(json))
-    //         setFetching(false)
-    //         localStorage.setItem('users', JSON.stringify(users))
-    //     }
+        if (response.ok) {
+            setUsers(addStatus(json))
+            setFetching(false)
+            localStorage.setItem('users', JSON.stringify(users))
+        }
 
-    //     console.log(users)
-    // }
+        console.log(users)
+    }
 
-    // const addStatus = (users: UserType[]) => { // function to add a default status if 'Pending' to all users
-    //     const newUsersList: UserType[] = []
-    //     users.map((user: UserType) => {
-    //         const updatedUser = { ...user, status: 'pending' }
-    //         newUsersList.push(updatedUser)
-    //     })
+    const addStatus = (users: UserType[]) => { // function to add a default status if 'Pending' to all users
+        const newUsersList: UserType[] = []
+        users.map((user: UserType) => {
+            const updatedUser = { ...user, status: 'pending' }
+            newUsersList.push(updatedUser)
+        })
 
-    //     return newUsersList
-    // }
-
-    // useEffect(() => {
-    //     getAllUsers()
-    // }, [])
+        return newUsersList
+    }
 
     useEffect(() => {
-        const allUsers = localStorage.getItem('users')
-        if (allUsers !== null) {
-            setUsers(JSON.parse(allUsers))
-        }
-        console.log(users)
+        getAllUsers()
     }, [])
+
+    // useEffect(() => {
+    //     const allUsers = localStorage.getItem('users')
+    //     if (allUsers !== null) {
+    //         setUsers(JSON.parse(allUsers))
+    //     }
+    //     console.log(users)
+    // }, [])
 
     const formatDate = (value: Date) => {
 
