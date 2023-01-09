@@ -6,6 +6,11 @@ nav {
     box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
     padding: 20px 60px 20px 30px;
     height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
 
     img {
         width: 144px;

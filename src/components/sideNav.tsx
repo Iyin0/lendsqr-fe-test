@@ -1,8 +1,26 @@
-import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Links from "../data/sideNavLinks";
 import '../styles/sideNav.scss'
 
 const SideNav = () => {
+
+    const location = useLocation()
+    const navRoutes = useRef<HTMLDivElement>(null!)
+
+    useEffect(() => {
+        Array.from(navRoutes.current.children).forEach((child) => {
+            child.classList.remove("stripe")
+
+            if (location.pathname.includes('/users')) {
+                if (child.id === 'Users') {
+                    child.classList.add("stripe")
+                }
+            }
+        })
+    }, [navRoutes, location.pathname])
+
+
     return (
         <aside>
             <button>
@@ -16,11 +34,10 @@ const SideNav = () => {
                 <img src={Links.dashboard} alt="" />
                 Dashboard
             </Link>
-            <div className="customers">
+            <div className="customers" ref={navRoutes}>
                 <p>CUSTOMERS</p>
                 {Links.customers.map((link, index) => (
-                    <Link to={link.href} key={index}>
-                        <div className="stripe"></div>
+                    <Link to={link.href} key={index} id={link.text}>
                         <img src={link.icon} alt="" />
                         {link.text}
                     </Link>

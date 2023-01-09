@@ -13,6 +13,7 @@ aside {
     background-color: #FFFFFF;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.04);
     overflow-y: scroll;
+    z-index: 1;
 
     &::-webkit-scrollbar {
         display: none;
@@ -61,12 +62,7 @@ aside {
         position: relative;
 
         .stripe {
-            height: 100%;
-            width: 3px;
-            background-color: #39CDCC;
-            position: absolute;
-            top: 0;
-            left: 0;
+            border-left: 3px solid #39CDCC;
         }
 
         p {
