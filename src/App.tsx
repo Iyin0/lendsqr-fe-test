@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import SideNav from "./components/sideNav"
 import TopNav from "./components/topNav"
 import Home from "./pages/home"
+import LandingPage from "./pages/landingPage"
 import Login from "./pages/login"
 import UserDetails from "./pages/userDetails"
 import Users from "./pages/users"
@@ -21,7 +22,8 @@ function App() {
         {loginState === 'false' ?
           (
             <Routes>
-              <Route path="/login" element={loginState !== 'false' ? <Navigate to='/' /> : <Login />} />
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           ) :
           (<div>
@@ -29,9 +31,9 @@ function App() {
             <div>
               <SideNav />
               <Routes>
-                <Route path="/" element={loginState === 'false' ? <Navigate to='/login' /> : <Home />} />
-                <Route path="/users" element={loginState === 'false' ? <Navigate to='/login' /> : <Users />} />
-                <Route path="/users/:id" element={loginState === 'false' ? <Navigate to='/login' /> : <UserDetails />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/users/:id" element={<UserDetails />} />
               </Routes>
             </div>
           </div>)
