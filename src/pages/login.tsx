@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PageTransition from "../components/pageTransition";
 import lendsqr from '../images/lendsqr.png'
 import hero from '../images/pablo.png'
@@ -10,6 +10,16 @@ const Login = () => {
     const [showPwd, setShowPwd] = useState(false)
     const [email, setEmail] = useState('')
     const [pwd, setPwd] = useState('')
+    const navigate = useNavigate()
+
+    const login = (e: any) => {
+        e.preventDefault()
+        if (email && pwd) {
+            window.localStorage.setItem('isLoggedIn', 'true')
+            navigate('/')
+            window.location.reload()
+        }
+    }
 
     return (
         <PageTransition>
@@ -32,7 +42,7 @@ const Login = () => {
                             <button className="shwPwd" onClick={(e) => { e.preventDefault(); setShowPwd(!showPwd) }}>{showPwd ? 'HIDE' : 'SHOW'}</button>
                         </div>
                         <Link to='/'>FORGOT PASSWORD?</Link>
-                        <button className="login-btn" onClick={(e) => { e.preventDefault() }}>LOG IN</button>
+                        <button className="login-btn" onClick={login}>LOG IN</button>
                     </form>
                 </div>
             </main >

@@ -64,37 +64,37 @@ const UserDetails = () => {
     const [system, setSystem] = useState(false)
     const [status, setStatus] = useState(user?.status)
 
-    const getUser = async () => {
-        setFetching(true)
-        setError(false)
-        const response = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${param.id}`)
-        const json = await response.json()
+    // const getUser = async () => {
+    //     setFetching(true)
+    //     setError(false)
+    //     const response = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${param.id}`)
+    //     const json = await response.json()
 
-        if (!response.ok) {
-            setError(json.error)
-            setFetching(false)
-        }
+    //     if (!response.ok) {
+    //         setError(json.error)
+    //         setFetching(false)
+    //     }
 
-        if (response.ok) {
-            setUser({ ...json, status: 'pending' })
-            setFetching(false)
-            window.localStorage.setItem('user', JSON.stringify(user))
-        }
+    //     if (response.ok) {
+    //         setUser({ ...json, status: 'pending' })
+    //         setFetching(false)
+    //         window.localStorage.setItem('user', JSON.stringify(user))
+    //     }
 
-        console.log(user)
-    }
-
-    useEffect(() => {
-        getUser()
-    }, [])
+    //     console.log(user)
+    // }
 
     // useEffect(() => {
-    //     const user_details = window.localStorage.getItem('user')
-    //     if (user_details !== null) {
-    //         setUser(JSON.parse(user_details))
-    //     }
-    //     console.log(user)
+    //     getUser()
     // }, [])
+
+    useEffect(() => {
+        const user_details = window.localStorage.getItem('user')
+        if (user_details !== null) {
+            setUser(JSON.parse(user_details))
+        }
+        console.log(user)
+    }, [])
 
     return (
         <PageTransition>

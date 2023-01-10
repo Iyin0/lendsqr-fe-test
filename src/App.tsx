@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom"
 import SideNav from "./components/sideNav"
 import TopNav from "./components/topNav"
 import Home from "./pages/home"
@@ -8,19 +9,33 @@ import Users from "./pages/users"
 
 function App() {
 
+  const [loginState, setLoginState] = useState(window.localStorage.getItem('isLoggedIn'))
+
+  useEffect(() => {
+    setLoginState(window.localStorage.getItem('isLoggedIn'))
+  }, [])
+
   return (
     <BrowserRouter>
       <div className="App">
-        {/* <Login /> */}
-        <TopNav />
-        <div>
-          <SideNav />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/users/:id" element={<UserDetails />} />
-          </Routes>
-        </div>
+        {loginState === 'false' ?
+          (
+            <Routes>
+              <Route path="/login" element={loginState !== 'false' ? <Navigate to='/' /> : <Login />} />
+            </Routes>
+          ) :
+          (<div>
+            <TopNav />
+            <div>
+              <SideNav />
+              <Routes>
+                <Route path="/" element={loginState === 'false' ? <Navigate to='/login' /> : <Home />} />
+                <Route path="/users" element={loginState === 'false' ? <Navigate to='/login' /> : <Users />} />
+                <Route path="/users/:id" element={loginState === 'false' ? <Navigate to='/login' /> : <UserDetails />} />
+              </Routes>
+            </div>
+          </div>)
+        }
       </div>
     </BrowserRouter>
   )
