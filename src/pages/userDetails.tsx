@@ -66,20 +66,21 @@ const UserDetails = () => {
 
     const getUser = async () => {
 
-        const user_details = window.localStorage.getItem('user')
-        if (user_details !== null) {
-            const userObj = JSON.parse(user_details)
-            if (userObj.id === param.id) {
-                setUser(userObj)
-                setFetching(false)
-            }
-            else {
-                setFetching(true)
-            }
-        }
-        else {
-            setFetching(true)
-        }
+        // const user_details = window.localStorage.getItem('user')
+        // if (user_details !== null) {
+        //     const userObj = JSON.parse(user_details)
+        //     if (userObj.id === param.id) {
+        //         setUser(userObj)
+        //         setFetching(false)
+        //     }
+        //     else {
+        //         setFetching(true)
+        //     }
+        // }
+        // else {
+        //     setFetching(true)
+        // }
+        setFetching(true)
         setError(false)
         const response = await fetch(`https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${param.id}`)
         const json = await response.json()
