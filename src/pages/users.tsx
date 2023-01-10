@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PageTransition from "../components/pageTransition";
 import '../styles/users.scss'
 
@@ -61,29 +62,7 @@ const Users = () => {
     const [rangeBottom, setRangeBottom] = useState(userNo + rangeTop)
     const [clickedUser, setClickedUser] = useState<number | null>(null)
     const [showUserRange, setShowUserRange] = useState(false)
-
-    const statusList = [
-        {
-            status: 'Active',
-            text_color: '#39CD62',
-            bg_color: '#39CD62'
-        },
-        {
-            status: 'Inactive',
-            text_color: '#545F7D',
-            bg_color: '#545F7D'
-        },
-        {
-            status: 'Pending',
-            text_color: '#E9B200',
-            bg_color: '##E9B200'
-        },
-        {
-            status: 'Blacklisted',
-            text_color: '#E4033B',
-            bg_color: '#E4033B'
-        }
-    ]
+    const navigate = useNavigate()
 
     const getAllUsers = async () => {
         setFetching(true)
@@ -99,13 +78,12 @@ const Users = () => {
         if (response.ok) {
             setUsers(addStatus(json))
             setFetching(false)
-            localStorage.setItem('users', JSON.stringify(users))
+            window.localStorage.setItem('users', JSON.stringify(users))
         }
 
-        console.log(users)
     }
 
-    const addStatus = (users: UserType[]) => { // function to add a default status if 'Pending' to all users
+    const addStatus = (users: UserType[]) => { // function to add a default status of 'Pending' to all users
         const newUsersList: UserType[] = []
         users.map((user: UserType) => {
             const updatedUser = { ...user, status: 'pending' }
@@ -120,11 +98,10 @@ const Users = () => {
     }, [])
 
     // useEffect(() => {
-    //     const allUsers = localStorage.getItem('users')
+    //     const allUsers = window.localStorage.getItem('users')
     //     if (allUsers !== null) {
     //         setUsers(JSON.parse(allUsers))
     //     }
-    //     console.log(users)
     // }, [])
 
     const formatDate = (value: Date) => {
@@ -316,7 +293,7 @@ const Users = () => {
                                 </button>
                                 {clickedUser === index && optionState ? (
                                     <div className="option">
-                                        <button onClick={() => { setOptionState(false); setClickedUser(null) }}>
+                                        <button onClick={() => { setOptionState(false); setClickedUser(null); navigate(`/users/${info.id}`) }}>
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M15.4533 7.44011L15.4519 7.43845C15.0398 6.92184 14.0948 5.82505 12.7977 4.85586C11.4993 3.88564 9.83832 3.03611 7.99968 3.03611C6.16104 3.03611 4.50011 3.88561 3.20166 4.85582C1.9029 5.82627 0.957157 6.92466 0.545819 7.44047C0.274826 7.76662 0.277249 8.2343 0.544833 8.57367L0.544827 8.57368L0.545641 8.57468C0.956296 9.08187 1.90229 10.1769 3.20172 11.1459C4.50012 12.1141 6.16105 12.9636 7.99968 12.9636C9.83832 12.9636 11.4993 12.1141 12.7977 11.1438C14.0966 10.1732 15.0424 9.07445 15.4537 8.55838C15.7074 8.2495 15.7071 7.74924 15.4533 7.44011ZM7.99968 11.7561C6.48691 11.7561 5.06807 11.0225 3.92942 10.172C2.84501 9.36201 2.02502 8.4537 1.63351 7.9981C2.01625 7.53083 2.83628 6.6224 3.92306 5.81583C5.06351 4.96943 6.48657 4.24347 7.99968 4.24347C9.51274 4.24347 10.9317 4.96936 12.0701 5.81576C13.1557 6.62284 13.9761 7.53202 14.3662 7.99979C13.9762 8.46752 13.1557 9.3767 12.0701 10.1838C10.9317 11.0302 9.51274 11.7561 7.99968 11.7561Z" fill="#545F7D" stroke="#545F7D" strokeWidth="0.2" />
                                                 <path d="M8.00014 4.90818C6.29675 4.90818 4.9083 6.2967 4.9083 8.00002C4.9083 9.70334 6.29682 11.0919 8.00014 11.0919C9.70346 11.0919 11.092 9.70334 11.092 8.00002C11.092 6.29669 9.70346 4.90818 8.00014 4.90818ZM8.00014 9.88386C6.96726 9.88386 6.11646 9.0324 6.11646 8.00018C6.11646 6.96728 6.96732 6.1165 8.00014 6.1165C9.03296 6.1165 9.88382 6.96736 9.88382 8.00018C9.88382 9.033 9.03296 9.88386 8.00014 9.88386Z" fill="#545F7D" stroke="#545F7D" strokeWidth="0.2" />
@@ -388,7 +365,7 @@ const Users = () => {
                         </button>
                     </div>
                     <div className="page-switch">
-                        <button onClick={previousPage}>
+                        <button disabled={rangeTop === 0} onClick={previousPage}>
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.6">
                                     <path d="M10.0061 11.0573C10.8472 11.8984 9.54344 13.1595 8.745 12.3184L3.99424 7.56759C3.61581 7.23127 3.61581 6.64282 3.99424 6.3065L8.61858 1.64002C9.45967 0.841037 10.7208 2.10267 9.87967 2.94322L5.8859 6.937L10.0061 11.0573Z" fill="#213F7D" />
@@ -396,7 +373,7 @@ const Users = () => {
                             </svg>
                         </button>
                         <p>1 2 3 ... 15 16</p>
-                        <button onClick={nextPage}>
+                        <button disabled={rangeBottom === users?.length} onClick={nextPage}>
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.99391 2.94274C3.15281 2.10165 4.45656 0.840502 5.255 1.68165L10.0058 6.43241C10.3842 6.76873 10.3842 7.35718 10.0058 7.6935L5.38142 12.36C4.54033 13.159 3.27918 11.8973 4.12033 11.0568L8.1141 7.063L3.99391 2.94274Z" fill="#213F7D" />
                             </svg>

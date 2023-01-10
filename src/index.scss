@@ -41,6 +41,12 @@
   font-weight: 400
 }
 
+@font-face {
+  font-family: SF Compact Text;
+  src: url(./fonts/SF-Compact-Text/SFCompactText-Regular.ttf);
+  font-weight: 400
+}
+
 .App {
   display: flex;
   flex-direction: column;

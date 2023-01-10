@@ -301,6 +301,11 @@
                 height: 24px;
                 background-color: rgba(33, 63, 125, 0.1);
                 border-radius: 4px;
+                transition: 0.5s;
+
+                &:disabled {
+                    opacity: 0.4;
+                }
             }
 
             p {
