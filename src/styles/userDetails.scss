@@ -114,48 +114,55 @@
                 }
             }
 
-            .tier {
-                padding: 0px 30px;
+            .tier-container {
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                border-left: 1px solid #545f7d33;
-                border-right: 1px solid #545f7d33;
 
-                p {
-                    font-weight: 500;
-                    font-size: 14px;
-                    line-height: 16px;
-                }
+                .tier {
+                    padding: 0px 30px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    border-left: 1px solid #545f7d33;
+                    border-right: 1px solid #545f7d33;
 
-                svg {
-                    margin-right: 4px;
-
-                    &:last-child {
-                        margin: 0;
-                    }
-                }
-            }
-
-            .bank {
-                padding-left: 30px;
-
-                p {
-                    margin: 0;
-
-                    &:first-child {
+                    p {
                         font-weight: 500;
-                        font-size: 22px;
-                        line-height: 26px;
-                        color: #213F7D;
-                        margin-bottom: 12px;
+                        font-size: 14px;
+                        line-height: 16px;
                     }
 
-                    &:last-child {
-                        font-weight: 400;
-                        font-size: 12px;
-                        line-height: 14px;
-                        color: #213F7D;
+                    svg {
+                        margin-right: 4px;
+
+                        &:last-child {
+                            margin: 0;
+                        }
+                    }
+                }
+
+                .bank {
+                    padding-left: 30px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    p {
+                        margin: 0;
+
+                        &:first-child {
+                            font-weight: 500;
+                            font-size: 22px;
+                            line-height: 26px;
+                            color: #213F7D;
+                            margin-bottom: 12px;
+                        }
+
+                        &:last-child {
+                            font-weight: 400;
+                            font-size: 12px;
+                            line-height: 14px;
+                            color: #213F7D;
+                        }
                     }
                 }
             }
@@ -230,6 +237,131 @@
                             font-weight: 500;
                             font-size: 16px;
                             line-height: 19px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .user-details {
+        margin: 100px 0px 0px;
+        padding: 20px;
+
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 20px 0px;
+
+            h1 {
+                font-size: 20px;
+                line-height: 24px;
+            }
+
+            .status {
+                margin-top: 20px;
+
+                button {
+                    width: auto;
+                }
+            }
+        }
+
+        .summary {
+            padding: 20px 20px 0px 20px;
+            height: auto;
+
+            .top {
+                flex-direction: column;
+                align-items: flex-start;
+
+                .profile {
+                    padding-right: 0;
+
+                    img {
+                        width: 70px;
+                        height: 70px;
+                    }
+
+                    .name {
+                        p {
+                            &:first-child {
+                                font-size: 20px;
+                                line-height: 24px;
+                                margin-bottom: 4px;
+                            }
+
+                            &:last-child {
+                                font-size: 12px;
+                                line-height: 14px;
+                            }
+                        }
+                    }
+                }
+
+                .tier-container {
+                    margin: 20px 0px;
+
+                    .tier {
+                        border-left: none;
+                        padding-left: 0;
+                    }
+
+                    .bank {
+                        p {
+                            &:first-child {
+                                font-size: 20px;
+                                line-height: 24px;
+                                margin-bottom: 8px;
+                            }
+
+                            &:last-child {
+                                font-size: 12px;
+                                line-height: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .bottom {
+                overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                button {
+                    flex-grow: 0;
+                    min-width: 150px;
+                    padding: 10px;
+                }
+            }
+        }
+
+        .info-section {
+            padding: 20px;
+
+            .info-container {
+
+                .info {
+
+                    div {
+                        margin: 30px 30px 0px 0px;
+
+                        p {
+                            margin: 0;
+
+                            &:first-child {
+                                margin-bottom: 6px;
+                            }
+
+                            &:last-child {
+                                font-size: 14px;
+                                line-height: 18px;
+                            }
                         }
                     }
                 }
