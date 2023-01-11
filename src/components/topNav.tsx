@@ -4,11 +4,14 @@ import '../styles/topNav.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useAppSelector, useAppDispatch } from "../reducer/hooks";
+import { toggleState } from "../reducer/sideNavState";
 
 const TopNav = () => {
 
     const [showDropdown, setShowDropdown] = useState(false)
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     const logout = () => {
         window.localStorage.setItem('isLoggedIn', 'false')
@@ -19,7 +22,10 @@ const TopNav = () => {
 
     return (
         <nav>
-            <button className='side-nav-call'>
+            <button
+                className='side-nav-call'
+                onClick={() => dispatch(toggleState(true))}
+            >
                 <img src={avatar} alt="" />
             </button>
             <img src={lendsqr} alt="" />

@@ -90,9 +90,14 @@ button:focus-visible {
   :root {
     color: #213547;
     background-color: #ffffff;
+
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
   }
 
   .App {
     width: 100vw;
+
   }
 }
