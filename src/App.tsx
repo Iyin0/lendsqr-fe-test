@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import SideNav from "./components/sideNav"
 import TopNav from "./components/topNav"
 import Home from "./pages/home"

@@ -4,7 +4,7 @@ import '../styles/topNav.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useAppSelector, useAppDispatch } from "../reducer/hooks";
+import { useAppDispatch } from "../reducer/hooks";
 import { toggleState } from "../reducer/sideNavState";
 
 const TopNav = () => {
