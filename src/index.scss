@@ -91,9 +91,9 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
 
-    // &::-webkit-scrollbar {
-    //   display: none;
-    // }
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .App {
