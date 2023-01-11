@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Links from "../data/sideNavLinks";
 import '../styles/sideNav.scss'
 import { useAppSelector, useAppDispatch } from "../reducer/hooks";
@@ -13,6 +13,15 @@ const SideNav = () => {
     const navRoutes = useRef<HTMLDivElement>(null!)
     const sideNavState = useAppSelector((state) => state.sideNav.value)
     const dispatch = useAppDispatch()
+    const [showDropdown, setShowDropdown] = useState(false)
+    const navigate = useNavigate()
+
+    const logout = () => {
+        window.localStorage.setItem('isLoggedIn', 'false')
+        setShowDropdown(false)
+        navigate('/login')
+        window.location.reload()
+    }
 
     useEffect(() => {
         Array.from(navRoutes.current.children).forEach((child) => {
@@ -28,16 +37,27 @@ const SideNav = () => {
 
 
     return (
-        <motion.aside
-            className={sideNavState ? "" : "hide"}
-            initial={{ x: 10, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-        >
+        <aside
+            className={sideNavState ? "" : "hide"}>
             <div className="sideNav">
                 <div className="profile">
-                    <img src={avatar} alt="" />
-                    <p>Adedeji</p>
+                    <button onClick={() => setShowDropdown(!showDropdown)}>
+                        <img src={avatar} alt="" />
+                        <p>Adedeji</p>
+                        <svg className={showDropdown ? 'reverse' : ''} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M9.39229 12.0516C9.72823 12.425 10.2751 12.4219 10.6079 12.0516L13.4829 8.857C13.8188 8.48434 13.6852 8.182 13.1845 8.182H6.81567C6.31489 8.182 6.18363 8.48746 6.51723 8.857L9.39229 12.0516Z" fill="#213F7D" />
+                        </svg>
+                    </button>
+                    {showDropdown &&
+                        <motion.div className="dropdown"
+                            initial={{ y: -10, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            <button onClick={() => setShowDropdown(false)}>Profile</button>
+                            <button onClick={logout}>Logout</button>
+                        </motion.div>
+                    }
                 </div>
                 <button onClick={() => dispatch(toggleState(false))}>
                     <img src={Links.organization} alt="" />
@@ -81,7 +101,7 @@ const SideNav = () => {
             <div className="blank" onClick={() => dispatch(toggleState(false))}>
 
             </div>
-        </motion.aside>
+        </aside>
     );
 }
 
