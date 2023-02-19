@@ -7,6 +7,7 @@ const Home = () => {
     useEffect(() => {
         navigate('/users')
     })
+
     return (
         <div></div>
     );
