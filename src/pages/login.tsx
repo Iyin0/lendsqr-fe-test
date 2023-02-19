@@ -15,9 +15,7 @@ const Login = () => {
     const login = (e: any) => {
         e.preventDefault()
         if (email && pwd) {
-            window.localStorage.setItem('isLoggedIn', 'true')
-            navigate('/')
-            window.location.reload()
+            navigate('/users')
         }
     }
 

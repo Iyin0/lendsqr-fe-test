@@ -4,9 +4,9 @@ import { useEffect } from 'react'
 const Home = () => {
     const navigate = useNavigate()
 
-    useEffect(() => {
-        navigate('/users')
-    })
+    // useEffect(() => {
+    //     navigate('/users')
+    // })
     return (
         <div></div>
     );

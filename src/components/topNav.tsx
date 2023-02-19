@@ -17,7 +17,6 @@ const TopNav = () => {
         window.localStorage.setItem('isLoggedIn', 'false')
         setShowDropdown(false)
         navigate('/login')
-        window.location.reload()
     }
 
     return (
