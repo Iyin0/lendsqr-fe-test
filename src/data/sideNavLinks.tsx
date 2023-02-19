@@ -26,7 +26,7 @@ const Links = {
         {
             text: 'Users',
             icon: users,
-            href: '#'
+            href: '/users'
         },
         {
             text: 'Guarantors',
